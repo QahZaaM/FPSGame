@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMotor : MonoBehaviour {
 	[SerializeField]
-	private Camera cam;
+	private Camera m_cam;
 	[SerializeField]
 	private float m_cameraRotationLimit = 85.0f;
 	private float m_cameraRotationX = 0.0f;
@@ -56,13 +56,13 @@ public class PlayerMotor : MonoBehaviour {
 
 	void PerformRotation() {
 		rb.MoveRotation(rb.rotation * Quaternion.Euler(m_rotation));
-		if(cam != null) {
+		if(m_cam != null) {
 			//Set our rotation and clamp it
 			m_currentCameraRotationX -= m_cameraRotationX;
 			m_currentCameraRotationX = Mathf.Clamp(m_currentCameraRotationX, -m_cameraRotationLimit, m_cameraRotationLimit);
 
 			//Apply our rotation to the transform of our camera
-			cam.transform.localEulerAngles = new Vector3(m_currentCameraRotationX, 0.0f, 0.0f);
+			m_cam.transform.localEulerAngles = new Vector3(m_currentCameraRotationX, 0.0f, 0.0f);
 		}
 	}
 
